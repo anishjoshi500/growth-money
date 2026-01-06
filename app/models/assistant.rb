@@ -41,7 +41,7 @@ class Assistant
 
     responder.on(:output_text) do |text|
       if assistant_message.content.blank?
-        stop_thinking
+        # stop_thinking is handled in ensure block now
 
         Chat.transaction do
           assistant_message.append_text!(text)
@@ -65,8 +65,9 @@ class Assistant
 
     responder.respond(previous_response_id: latest_response_id)
   rescue => e
-    stop_thinking
     chat.add_error(e)
+  ensure
+    stop_thinking
   end
 
   private
