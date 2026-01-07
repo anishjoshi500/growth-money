@@ -2,23 +2,23 @@
 
 This guide aims to assist new users through:
 
-1. Creating a Sure account
+1. Creating a Growth Money account
 2. Adding your first accounts
 3. Recording transactions
 
-This guide also covers the differences between **asset** and **liability** accounts, a key concept for using and understanding balances in Sure!
+This guide also covers the differences between **asset** and **liability** accounts, a key concept for using and understanding balances in Growth Money!
 
 > [!IMPORTANT]
-> Sure is evolving quickly. If you find something inaccurate while following this guide, please:
+> Growth Money is evolving quickly. If you find something inaccurate while following this guide, please:
 > 
 > - Ask in the [Discord](https://discord.gg/36ZGBsxYEK)
-> - Open an [issue](https://github.com/we-promise/sure/issues/new/choose)
-> - Or if you know the answer, open a [PR](https://github.com/we-promise/sure/compare)!
+> - Open an [issue](https://github.com/maybe-finance/maybe/issues)
+> - Or if you know the answer, open a [PR](https://github.com/maybe-finance/maybe/pulls)!
 
 
-## 1. Creating your Sure Account
+## 1. Creating your Growth Money Account
 
-Once Sure is installed, open a browser and navigate to [localhost:3000](http://localhost:3000/sessions/new).<br />
+Once Growth Money is installed, open a browser and navigate to [localhost:3000](http://localhost:3000/sessions/new).<br />
 You will see the **login page** (pictured below). Since we do not have an account yet, click on **Sign Up** to begin. 
 
 <img width="2508" height="1314" alt="Landing page on a fresh install." src="https://github.com/user-attachments/assets/2319dc87-5615-4473-bebc-8360dd983367" />

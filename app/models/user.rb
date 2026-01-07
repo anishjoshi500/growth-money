@@ -289,7 +289,7 @@ class User < ApplicationRecord
     end
 
     def totp
-      ROTP::TOTP.new(otp_secret, issuer: "Sure Finances")
+      ROTP::TOTP.new(otp_secret, issuer: "Growth Money")
     end
 
     def verify_backup_code?(code)

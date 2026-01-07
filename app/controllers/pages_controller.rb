@@ -10,11 +10,24 @@ class PagesController < ApplicationController
     family_currency = Current.family.currency
 
     # Use the same period for all widgets (set by Periodable concern)
-    income_totals = Current.family.income_statement.income_totals(period: @period)
-    expense_totals = Current.family.income_statement.expense_totals(period: @period)
+    cache_key = [
+      "dashboard_v1",
+      Current.family.id,
+      @period.range_string,
+      Current.family.transactions.maximum(:updated_at),
+      Current.family.categories.maximum(:updated_at)
+    ]
 
-    @cashflow_sankey_data = build_cashflow_sankey_data(income_totals, expense_totals, family_currency)
-    @outflows_data = build_outflows_donut_data(expense_totals, family_currency)
+    @cashflow_sankey_data, @outflows_data = Rails.cache.fetch(cache_key, expires_in: 5.minutes) do
+      income_totals = Current.family.income_statement.income_totals(period: @period)
+      expense_totals = Current.family.income_statement.expense_totals(period: @period)
+      family_currency = Current.family.currency
+
+      [
+        build_cashflow_sankey_data(income_totals, expense_totals, family_currency),
+        build_outflows_donut_data(expense_totals, family_currency)
+      ]
+    end
 
     @dashboard_sections = build_dashboard_sections
 

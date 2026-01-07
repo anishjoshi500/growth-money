@@ -205,6 +205,13 @@ class Provider::Openai < Provider
           # for the "response chunk" in the stream and return it (it is already parsed)
           if stream_proxy.present?
             response_chunk = collected_chunks.find { |chunk| chunk.type == "response" }
+
+            unless response_chunk
+              Rails.logger.error("No response chunk received from OpenAI stream")
+              # Create a fallback empty response or raise a specific error
+              raise Error, "No completion response received from LLM provider"
+            end
+
             response = response_chunk.data
             usage = response_chunk.usage
             Rails.logger.debug("Stream response usage: #{usage.inspect}")
