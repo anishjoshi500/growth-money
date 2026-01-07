@@ -34,7 +34,7 @@
     </div>
 
     <%# MOBILE - Top nav %>
-    <nav class="lg:hidden flex justify-between items-center p-3" data-print="hide">
+    <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-surface z-10 pt-1 pb-[env(safe-area-inset-bottom)] border-t border-tertiary flex justify-around" data: { print: "hide" }>
       <%= icon("panel-left", as_button: true, data: { action: "app-layout#openMobileSidebar"}) %>
 
       <%= link_to root_path, class: "block" do %>

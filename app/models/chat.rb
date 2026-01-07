@@ -33,13 +33,13 @@ class Chat < ApplicationRecord
   end
 
   def needs_assistant_response?
-    conversation_messages.ordered.last.role != "assistant"
+    conversation_messages.ordered.first.role != "assistant"
   end
 
   def retry_last_message!
     update!(error: nil)
 
-    last_message = conversation_messages.ordered.last
+    last_message = conversation_messages.ordered.first
 
     if last_message.present? && last_message.role == "user"
 

@@ -1,4 +1,4 @@
-# Welcome to Sure!
+# Welcome to Growth Money!
 
 This guide aims to assist new users through:
 
