@@ -13,7 +13,7 @@ class PagesController < ApplicationController
     cache_key = [
       "dashboard_v1",
       Current.family.id,
-      @period.range_string,
+      "#{@period.start_date}-#{@period.end_date}",
       Current.family.transactions.maximum(:updated_at),
       Current.family.categories.maximum(:updated_at)
     ]
