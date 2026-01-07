@@ -38,10 +38,10 @@ gem "sidekiq-unique-jobs"
 # Monitoring
 gem "vernier"
 gem "rack-mini-profiler"
-gem "sentry-ruby"
-gem "sentry-rails"
-gem "sentry-sidekiq"
-gem "posthog-ruby"
+# gem "sentry-ruby"
+# gem "sentry-rails"
+# gem "sentry-sidekiq"
+# gem "posthog-ruby"
 gem "logtail-rails"
 gem "skylight", groups: [ :production ]
 
