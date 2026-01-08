@@ -76,46 +76,54 @@
                 </div>
               </div>
             </div>
-            <div class="flex items-center gap-4">
-              <% if self_hosted? %>
-                <div class="flex items-center gap-2" data-controller="clipboard">
-                  <p class="text-secondary text-sm"><%= t(".invitation_link") %></p>
-                  <span data-clipboard-target="source" class="hidden"><%= accept_invitation_url(invitation.token) %></span>
-                  <input type="text"
-                             readonly
-                             autocomplete="off"
-                             value="<%= accept_invitation_url(invitation.token) %>"
-                             class="text-sm bg-gray-50 px-2 py-1 rounded border border-secondary w-72">
-                  <button data-action="clipboard#copy" class="text-secondary hover:text-gray-700">
-                    <span data-clipboard-target="iconDefault">
-                      <%= icon "copy" %>
-                    </span>
-                    <span class="hidden" data-clipboard-target="iconSuccess">
-                      <%= icon "check" %>
-                    </span>
-                  </button>
-                </div>
-              <% end %>
+            <div class="flex flex-col md:flex-row md:items-center gap-4 w-full overflow-hidden">
+              <div class="flex flex-col md:flex-row md:items-center gap-4 grow min-w-0">
+                <% if self_hosted? %>
+                  <div class="flex flex-col gap-1.5 grow min-w-0" data-controller="clipboard">
+                    <p class="text-secondary text-xs font-medium uppercase"><%= t(".invitation_link") %></p>
+                    <div class="flex items-center gap-2 w-full">
+                      <span data-clipboard-target="source" class="hidden"><%= accept_invitation_url(invitation.token) %></span>
+                      <input type="text"
+                                 readonly
+                                 autocomplete="off"
+                                 value="<%= accept_invitation_url(invitation.token) %>"
+                                 class="text-sm bg-surface-inset px-2 py-1.5 rounded border border-secondary grow min-w-0 truncate">
+                      <button data-action="clipboard#copy" class="text-secondary hover:text-primary shrink-0 transition-colors">
+                        <span data-clipboard-target="iconDefault">
+                          <%= icon "copy", size: "sm" %>
+                        </span>
+                        <span class="hidden" data-clipboard-target="iconSuccess">
+                          <%= icon "check", size: "sm", class: "text-green-500" %>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
 
-              <% if smtp_configured? %>
-                <%= render DS::Button.new(
-                  text: t(".resend_email"),
-                  variant: "secondary",
-                  size: :sm,
-                  href: resend_invitation_path(invitation),
-                  method: :post
-                ) %>
-              <% end %>
+              <div class="flex items-center gap-2 shrink-0">
+                <% if smtp_configured? %>
+                  <%= render DS::Button.new(
+                    text: t(".resend_email"),
+                    variant: "secondary",
+                    size: :sm,
+                    href: resend_invitation_path(invitation),
+                    method: :post,
+                    class: "whitespace-nowrap"
+                  ) %>
+                <% end %>
 
-              <% if Current.user.admin? %>
-                <%= render DS::Button.new(
-                  variant: "icon",
-                  icon: "x",
-                  href: invitation_path(invitation),
-                  method: :delete,
-                  confirm: CustomConfirm.for_resource_deletion(invitation.email, high_severity: true)
-                ) %>
-              <% end %>
+                <% if Current.user.admin? %>
+                  <%= render DS::Button.new(
+                    variant: "icon",
+                    icon: "x",
+                    href: invitation_path(invitation),
+                    method: :delete,
+                    confirm: CustomConfirm.for_resource_deletion(invitation.email, high_severity: true),
+                    class: "shrink-0"
+                  ) %>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>
