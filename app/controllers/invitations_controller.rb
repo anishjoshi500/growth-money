@@ -15,10 +15,33 @@ class InvitationsController < ApplicationController
     @invitation.inviter = Current.user
 
     if @invitation.save
-      InvitationMailer.invite_email(@invitation).deliver_later unless self_hosted?
-      flash[:notice] = t(".success")
+      if !self_hosted? || smtp_configured?
+        InvitationMailer.invite_email(@invitation).deliver_later
+        flash[:notice] = t(".success")
+      else
+        flash[:notice] = t(".success_manual")
+      end
     else
       flash[:alert] = t(".failure")
+    end
+
+    redirect_to settings_profile_path
+  end
+
+  def resend
+    unless Current.user.admin?
+      flash[:alert] = t("invitations.destroy.not_authorized")
+      redirect_to settings_profile_path
+      return
+    end
+
+    @invitation = Current.family.invitations.find(params[:id])
+
+    if !self_hosted? || smtp_configured?
+      InvitationMailer.invite_email(@invitation).deliver_later
+      flash[:notice] = t(".success")
+    else
+      flash[:alert] = t(".no_smtp")
     end
 
     redirect_to settings_profile_path

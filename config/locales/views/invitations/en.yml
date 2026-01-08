@@ -4,6 +4,10 @@ en:
     create:
       failure: Could not send invitation
       success: Invitation sent successfully
+      success_manual: Invitation created successfully. You can find the link in your profile settings.
+    resend:
+      success: Invitation email resent successfully
+      no_smtp: SMTP is not configured. Please use the manual link below.
     destroy:
       failure: There was a problem removing the invitation.
       not_authorized: You are not authorized to manage invitations.

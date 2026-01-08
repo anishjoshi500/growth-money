@@ -2,7 +2,7 @@ module SelfHostable
   extend ActiveSupport::Concern
 
   included do
-    helper_method :self_hosted?, :self_hosted_first_login?
+    helper_method :self_hosted?, :self_hosted_first_login?, :smtp_configured?
 
     prepend_before_action :verify_self_host_config
   end
@@ -10,6 +10,10 @@ module SelfHostable
   private
     def self_hosted?
       Rails.configuration.app_mode.self_hosted?
+    end
+
+    def smtp_configured?
+      ENV["SMTP_ADDRESS"].present?
     end
 
     def self_hosted_first_login?
