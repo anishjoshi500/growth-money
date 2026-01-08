@@ -41,8 +41,5 @@ module Sure
 
     # Enable Rack::Attack middleware for API rate limiting
     config.middleware.use Rack::Attack
-
-    config.action_mailer.default_url_options = { host: ENV["APP_DOMAIN"] } if ENV["APP_DOMAIN"].present?
-    config.action_controller.default_url_options = { host: ENV["APP_DOMAIN"] } if ENV["APP_DOMAIN"].present?
   end
 end
