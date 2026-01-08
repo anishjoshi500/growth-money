@@ -75,11 +75,20 @@ class Rule < ApplicationRecord
     return "No conditions" if conditions.none?
 
     first_condition = conditions.first
-    if first_condition.compound? && first_condition.sub_conditions.any?
-      first_sub_condition = first_condition.sub_conditions.first
-      "If #{first_sub_condition.filter.label.downcase} #{first_sub_condition.operator} #{first_sub_condition.value_display}"
-    else
-      "If #{first_condition.filter.label.downcase} #{first_condition.operator} #{first_condition.value_display}"
+    begin
+      if first_condition.compound?
+        if first_condition.sub_conditions.any?
+          first_sub_condition = first_condition.sub_conditions.first
+          "If #{first_sub_condition.filter.label.downcase} #{first_sub_condition.operator} #{first_sub_condition.value_display}"
+        else
+          "Compound condition (empty)"
+        end
+      else
+        "If #{first_condition.filter.label.downcase} #{first_condition.operator} #{first_condition.value_display}"
+      end
+    rescue => e
+      Rails.logger.error "Error generating rule title for rule #{id}: #{e.message}"
+      "Untitled rule"
     end
   end
 
