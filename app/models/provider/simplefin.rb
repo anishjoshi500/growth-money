@@ -6,7 +6,7 @@ class Provider::Simplefin
   # `config/initializers/simplefin.rb`.
   include HTTParty
 
-  headers "User-Agent" => "Sure Finance SimpleFin Client"
+  headers "User-Agent" => "Growth Money SimpleFin Client"
   default_options.merge!(verify: true, ssl_verify_mode: OpenSSL::SSL::VERIFY_PEER, timeout: 120)
 
   # Retry configuration for transient network failures

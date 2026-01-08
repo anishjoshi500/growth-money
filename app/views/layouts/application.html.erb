@@ -158,8 +158,10 @@
     <% end %>
   </div>
 
-  <%# MOBILE - Bottom Nav - Moved to end for better isolation and consistent positioning %>
-  <%= tag.nav class: "lg:hidden fixed bottom-6 left-4 right-4 bg-surface/90 backdrop-blur-md z-40 p-2 rounded-2xl border border-white/10 shadow-xl flex justify-around", data: { print: "hide" } do %>
+  <%# MOBILE - Bottom Nav - floating glass, safe-area aware %>
+  <%= tag.nav class: "lg:hidden fixed z-50 p-2 rounded-3xl border border-white/20 shadow-2xl flex justify-around bg-surface/85 backdrop-blur-xl pointer-events-auto",
+    style: "left: 16px; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);",
+    data: { print: "hide" } do %>
     <% mobile_nav_items.each do |nav_item| %>
       <%= render "layouts/shared/nav_item", **nav_item %>
     <% end %>

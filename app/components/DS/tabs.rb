@@ -12,7 +12,10 @@ class DS::Tabs < DesignSystemComponent
   renders_many :panels, ->(tab_id:, &block) do
     content_tag(
       :div,
-      class: ("hidden" unless tab_id == active_tab),
+      class: class_names(
+        "transition-opacity duration-200 ease-out relative",
+        tab_id == active_tab ? "opacity-100" : "opacity-0 pointer-events-none absolute inset-0"
+      ),
       data: { id: tab_id, DS__tabs_target: "panel" },
       &block
     )

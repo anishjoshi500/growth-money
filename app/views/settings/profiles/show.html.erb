@@ -97,16 +97,6 @@
                 </div>
               <% end %>
 
-              <% if smtp_configured? %>
-                <%= render DS::Button.new(
-                  text: t(".resend_email"),
-                  variant: "secondary",
-                  size: :sm,
-                  href: resend_invitation_path(invitation),
-                  method: :post
-                ) %>
-              <% end %>
-
               <% if Current.user.admin? %>
                 <%= render DS::Button.new(
                   variant: "icon",

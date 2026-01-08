@@ -1,6 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
   default from: email_address_with_name(
-    ENV.fetch("EMAIL_SENDER", "sender@sure.local"),
+    ENV.fetch("EMAIL_SENDER", "no-reply@growthmoney.local"),
     "#{Rails.configuration.x.brand_name} #{Rails.configuration.x.product_name}"
   )
   layout "mailer"
