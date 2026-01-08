@@ -75,7 +75,9 @@
           </button>
         </div>
         <div class="py-4" data-dashboard-section-target="content">
-          <%= render partial: section[:partial], locals: section[:locals] %>
+          <% cache [section[:key], section[:locals], Current.family.id] do %>
+            <%= render partial: section[:partial], locals: section[:locals] %>
+          <% end %>
         </div>
       </section>
     <% end %>

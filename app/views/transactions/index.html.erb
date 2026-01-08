@@ -108,7 +108,7 @@
           <% end %>
 
           <%= entries_by_date(@transactions.map(&:entry), totals: true) do |entries| %>
-            <%= render entries %>
+            <%= render entries, cached: true %>
           <% end %>
         </div>
       </div>

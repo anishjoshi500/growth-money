@@ -16,7 +16,7 @@ class InvitationsController < ApplicationController
 
     if @invitation.save
       if !self_hosted? || smtp_configured?
-        InvitationMailer.invite_email(@invitation).deliver_later
+        InvitationMailer.invite_email(@invitation).deliver_now
         flash[:notice] = t(".success")
       else
         flash[:notice] = t(".success_manual")
@@ -38,7 +38,7 @@ class InvitationsController < ApplicationController
     @invitation = Current.family.invitations.find(params[:id])
 
     if !self_hosted? || smtp_configured?
-      InvitationMailer.invite_email(@invitation).deliver_later
+      InvitationMailer.invite_email(@invitation).deliver_now
       flash[:notice] = t(".success")
     else
       flash[:alert] = t(".no_smtp")

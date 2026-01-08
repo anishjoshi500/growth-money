@@ -158,10 +158,12 @@
     <% end %>
   </div>
 
-  <%# MOBILE - Bottom Nav - Move to bottom of screen and account for safe area %>
-  <%= tag.nav class: "lg:hidden fixed bottom-[calc(env(safe-area-inset-bottom)+1.5rem)] left-1/2 -translate-x-1/2 max-w-[400px] w-[calc(100%-2rem)] bg-surface/90 backdrop-blur-md z-[60] p-2 rounded-2xl border border-white/10 shadow-xl flex justify-around", data: { print: "hide" } do %>
-    <% mobile_nav_items.each do |nav_item| %>
-      <%= render "layouts/shared/nav_item", **nav_item %>
+  <%# MOBILE - Bottom Nav - Refining positioning for absolute stability across all pages %>
+  <div class="lg:hidden fixed bottom-1 left-0 right-0 z-[60] flex justify-center pointer-events-none pb-safe mb-4">
+    <%= tag.nav class: "pointer-events-auto max-w-[400px] w-[calc(100%-1.5rem)] bg-surface/90 backdrop-blur-md p-2 rounded-2xl border border-white/10 shadow-xl flex justify-around", data: { print: "hide" } do %>
+      <% mobile_nav_items.each do |nav_item| %>
+        <%= render "layouts/shared/nav_item", **nav_item %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>

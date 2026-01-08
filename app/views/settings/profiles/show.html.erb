@@ -64,19 +64,22 @@
       <% end %>
       <% if @pending_invitations.any? %>
         <% @pending_invitations.each do |invitation| %>
-          <div class="flex gap-2 items-center justify-between bg-container p-4 border border-alpha-black-25 rounded-lg">
-            <div class="flex gap-2 items-center">
+          <div class="flex flex-col md:flex-row gap-4 bg-container p-4 border border-alpha-black-25 rounded-lg">
+            <div class="flex gap-2 items-center min-w-0">
               <div class="w-9 h-9 shrink-0">
                 <div class="fg-inverse w-full h-full bg-surface-inset rounded-full flex items-center justify-center text-lg uppercase"><%= invitation.email[0] %></div>
               </div>
-              <div class="flex">
-                <p class="text-primary font-medium text-sm"><%= invitation.email %></p>
-                <div class="rounded-md bg-surface px-1.5 py-0.5">
-                  <p class="uppercase text-secondary font-medium text-xs"><%= t(".pending") %></p>
+              <div class="flex flex-col min-w-0">
+                <p class="text-primary font-medium text-sm truncate"><%= invitation.email %></p>
+                <div class="flex items-center gap-2 mt-1">
+                  <div class="rounded-md bg-surface px-1.5 py-0.5 w-fit">
+                    <p class="uppercase text-secondary font-medium text-xs"><%= t(".pending") %></p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="flex flex-col md:flex-row md:items-center gap-4 w-full overflow-hidden">
+
+            <div class="flex flex-col md:flex-row md:items-center gap-4 grow min-w-0">
               <div class="flex flex-col md:flex-row md:items-center gap-4 grow min-w-0">
                 <% if self_hosted? %>
                   <div class="flex flex-col gap-1.5 grow min-w-0" data-controller="clipboard">
@@ -101,7 +104,7 @@
                 <% end %>
               </div>
 
-              <div class="flex items-center gap-2 shrink-0">
+              <div class="flex items-center gap-2 shrink-0 md:ml-auto">
                 <% if smtp_configured? %>
                   <%= render DS::Button.new(
                     text: t(".resend_email"),
