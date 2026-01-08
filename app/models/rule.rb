@@ -77,9 +77,13 @@ class Rule < ApplicationRecord
     first_condition = conditions.first
     begin
       if first_condition.compound?
-        if first_condition.sub_conditions.any?
-          first_sub_condition = first_condition.sub_conditions.first
-          "If #{first_sub_condition.filter.label.downcase} #{first_sub_condition.operator} #{first_sub_condition.value_display}"
+        sub_count = first_condition.sub_conditions.count
+        operator_label = first_condition.operator == "or" ? "any" : "all"
+
+        if sub_count > 0
+          first_sub = first_condition.sub_conditions.first
+          title = "Match #{operator_label} of #{sub_count} conditions (starts with: #{first_sub.filter.label.downcase} #{first_sub.operator})"
+          title
         else
           "Compound condition (empty)"
         end
