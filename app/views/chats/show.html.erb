@@ -1,5 +1,5 @@
-<div data-controller="chat hotkey" class="h-full">
-  <%= turbo_frame_tag chat_frame, class: "h-full flex flex-col" do %>
+<div data-controller="chat hotkey" class="min-h-screen flex flex-col">
+  <%= turbo_frame_tag chat_frame, class: "h-full flex flex-col flex-1" do %>
     <%= turbo_stream_from @chat %>
 
     <h1 class="sr-only"><%= @chat.title %></h1>
@@ -17,7 +17,7 @@
 
       <div
         id="messages"
-        class="flex-1 overflow-y-auto px-4 pt-2 pb-28 lg:pb-6 space-y-6"
+        class="flex-1 min-h-0 overflow-y-auto px-4 pt-2 pb-28 lg:pb-6 space-y-6"
         data-chat-target="messages">
         <% if @chat.conversation_messages.any? %>
           <% @chat.conversation_messages.ordered.each do |message| %>
