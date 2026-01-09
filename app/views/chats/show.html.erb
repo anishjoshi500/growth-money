@@ -1,5 +1,5 @@
 <div data-controller="chat hotkey" class="h-full">
-  <%= turbo_frame_tag chat_frame do %>
+  <%= turbo_frame_tag chat_frame, class: "h-full flex flex-col" do %>
     <%= turbo_stream_from @chat %>
 
     <h1 class="sr-only"><%= @chat.title %></h1>
